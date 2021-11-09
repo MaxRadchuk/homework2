@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+
+jobs:
+
+ build:
+
+  runs-on: ubuntu-latest
+
+  steps:
+    - uses: actions/checkout@v2
+    - name: Dockerize
+      if: success()
+      uses: manusa/actions-publish-docker@v1.1.2
+      with:
+       name: maxradchuk/github
+       username: ${{ secrets.DOCKER_HUB_USER }}
+       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
